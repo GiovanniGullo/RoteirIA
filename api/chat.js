@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       parts: [{ text: m.content }]
     }));
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
       method: 'POST',
@@ -30,8 +30,6 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    console.log('Google response status:', response.status);
-    console.log('Google response:', JSON.stringify(data).slice(0, 300));
 
     if (!response.ok) {
       return res.status(200).json({
@@ -43,7 +41,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ content: [{ type: 'text', text }] });
 
   } catch (error) {
-    console.error('Error:', error.message);
-    return res.status(200).json({ content: [{ type: 'text', text: 'Erro de conexão: ' + error.message }] });
+    return res.status(200).json({ content: [{ type: 'text', text: 'Erro: ' + error.message }] });
   }
 }
