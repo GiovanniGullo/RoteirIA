@@ -8,42 +8,42 @@ export default async function handler(req, res) {
 
   try {
     const { messages, system } = req.body;
+    const apiKey = process.env.GOOGLE_API_KEY;
 
-    const systemText = system || 'Você é um assistente especialista em viagens internacionais para brasileiros. Responda em português brasileiro, de forma amigável e objetiva. Máximo 220 palavras por resposta.';
+    const systemText = system || 'Você é um assistente especialista em viagens internacionais para brasileiros. Responda em português brasileiro, de forma amigável e objetiva. Máximo 220 palavras.';
 
-    const contents = [];
-    for (const m of messages) {
-      contents.push({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }]
+    const contents = messages.map(m => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }]
+    }));
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents,
+        systemInstruction: { parts: [{ text: systemText }] },
+        generationConfig: { maxOutputTokens: 800, temperature: 0.7 }
+      })
+    });
+
+    const data = await response.json();
+    console.log('Google response status:', response.status);
+    console.log('Google response:', JSON.stringify(data).slice(0, 300));
+
+    if (!response.ok) {
+      return res.status(200).json({
+        content: [{ type: 'text', text: `Erro ${response.status}: ${data?.error?.message || 'Tente novamente.'}` }]
       });
     }
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GOOGLE_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: systemText }] },
-          contents,
-          generationConfig: { maxOutputTokens: 800, temperature: 0.7 }
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error('Google API error:', JSON.stringify(data));
-      return res.status(500).json({ content: [{ type: 'text', text: 'Erro na API. Tente novamente.' }] });
-    }
-
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Desculpe, não consegui responder.';
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Sem resposta.';
     return res.status(200).json({ content: [{ type: 'text', text }] });
 
   } catch (error) {
-    console.error('Handler error:', error);
-    return res.status(500).json({ content: [{ type: 'text', text: 'Erro interno. Tente novamente.' }] });
+    console.error('Error:', error.message);
+    return res.status(200).json({ content: [{ type: 'text', text: 'Erro de conexão: ' + error.message }] });
   }
 }
