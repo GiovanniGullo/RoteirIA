@@ -609,6 +609,7 @@ renderItems();
 // CONVERSOR
 var taxas = {};
 var MOEDAS = [
+  {code:"BRL", flag:"🇧🇷", name:"Real Brasileiro"},
   {code:"USD", flag:"🇺🇸", name:"Dólar EUA"},
   {code:"EUR", flag:"🇪🇺", name:"Euro"},
   {code:"GBP", flag:"🇬🇧", name:"Libra Esterlina"},
@@ -645,8 +646,11 @@ function converter() {
     var m = MOEDAS[i];
     if (m.code === de) continue;
     var result;
+    if (m.code === de) continue;
     if (de === "BRL") {
       result = valor * (taxas[m.code] || 0);
+    } else if (m.code === "BRL") {
+      result = valor / (taxas[de] || 1);
     } else {
       result = (valor / (taxas[de] || 1)) * (taxas[m.code] || 0);
     }
