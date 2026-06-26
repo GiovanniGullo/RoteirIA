@@ -3,7 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TaxPay — Voos + Inteligência Tributária</title>
+
+<!-- SEO PRIMARY -->
+<title>TaxPay — Calculadora de Alfândega, Voos Baratos e Conversor de Moedas</title>
+<meta name="description" content="Compare passagens aéreas baratas, calcule impostos da alfândega brasileira e converta moedas em tempo real. Ferramenta gratuita para viajantes que querem economizar e evitar multas na Receita Federal.">
+<meta name="keywords" content="calculadora alfândega, limite alfândega brasil, passagens baratas, conversor moedas viagem, e-DBV receita federal, imposto compras exterior, isenção alfândega, compras no exterior, voos baratos brasil, declaração bens viajante">
+<meta name="robots" content="index, follow">
+<meta name="author" content="TaxPay">
+<link rel="canonical" href="https://www.roteiria.com">
+
+<!-- OPEN GRAPH (WhatsApp, Facebook, LinkedIn) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.roteiria.com">
+<meta property="og:title" content="TaxPay — Calculadora de Alfândega e Voos Baratos">
+<meta property="og:description" content="Calcule quanto pode trazer do exterior sem pagar multa, compare voos baratos e converta moedas. Grátis e baseado nas regras oficiais da Receita Federal.">
+<meta property="og:locale" content="pt_BR">
+
+<!-- TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TaxPay — Calculadora de Alfândega e Voos Baratos">
+<meta name="twitter:description" content="Calcule quanto pode trazer do exterior sem pagar multa. Grátis, baseado nas regras da Receita Federal.">
+
+<!-- SCHEMA.ORG (Google Rich Results) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "TaxPay",
+  "description": "Calculadora de alfândega, buscador de voos baratos e conversor de moedas para viajantes brasileiros.",
+  "url": "https://www.roteiria.com",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "BRL"
+  },
+  "featureList": [
+    "Calculadora de alfândega com regras da Receita Federal",
+    "Busca de passagens aéreas",
+    "Conversor de moedas em tempo real",
+    "Ranking Top 10 passagens mais baratas",
+    "Guia da e-DBV"
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -383,6 +428,55 @@ footer{background:var(--dark);color:#6B7280;padding:36px 5%;display:flex;justify
   <p style="font-size:12px;">Cotações aproximadas. Consulte a Receita Federal para informações oficiais.</p>
 </footer>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qual o limite de isenção da alfândega no Brasil em 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "O limite de isenção é de US$ 1.000 para viagens aéreas ou marítimas e US$ 500 para viagens terrestres ou fluviais. Sobre o valor excedente incide imposto de 50%."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que é a e-DBV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A e-DBV (Declaração Eletrônica de Bens do Viajante) é o sistema oficial da Receita Federal para declarar bens comprados no exterior. Pode ser preenchida pelo site edbv.receita.fazenda.gov.br ou pelo app Viajantes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual a multa por não declarar bens na alfândega?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Se flagrado sem declarar, o viajante paga o imposto de 50% sobre o excedente mais uma multa adicional de 50% — totalizando 100% do valor dos bens não declarados."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como encontrar passagens aéreas baratas saindo do Brasil?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use nosso buscador de voos para comparar preços entre companhias aéreas. Anote o código do voo escolhido e finalize a compra no portal SpeedMilhas ou fale com nosso agente pelo WhatsApp."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto posso comprar no exterior sem pagar imposto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Viajando de avião ou navio, você pode comprar até US$ 1.000 sem pagar imposto. Além disso, pode comprar até US$ 1.000 adicionais nas lojas duty free do aeroporto de chegada no Brasil."
+      }
+    }
+  ]
+}
+</script>
+
 <script>
 // DATAS
 var hoje = new Date();
@@ -480,7 +574,7 @@ function buscarVoos() {
       var d = new Date(dataIda + "T12:00:00");
       dataFmt = d.toLocaleDateString("pt-BR", {day:"2-digit", month:"short"});
     }
-    var spUrl = "https://portal.speedmilhas.com/logar";
+    var spUrl = "https://wa.me/5511974566332?text=Ola!%20Vim%20pelo%20TaxPay%20e%20quero%20comprar%20uma%20passagem!";
 
     var html = "<div class=\"flights-header\">";
     html += "<h3>" + voos.length + " voos encontrados";
@@ -684,7 +778,7 @@ var RANKING = [
 ];
 
 function renderRanking() {
-  var spUrl = "https://portal.speedmilhas.com/logar";
+  var spUrl = "https://wa.me/5511974566332?text=Ola!%20Vim%20pelo%20TaxPay%20e%20quero%20comprar%20uma%20passagem!";
   var html = "";
   for (var i = 0; i < RANKING.length; i++) {
     var r = RANKING[i];
