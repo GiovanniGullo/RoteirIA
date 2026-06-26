@@ -3,259 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RoteirIA — Voos + Inteligência Tributária para Viajantes</title>
+<title>TaxPay — Voos + Inteligência Tributária</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal: #0F6E56;
-  --teal-light: #1D9E75;
-  --teal-pale: #E1F5EE;
-  --teal-mid: #5DCAA5;
-  --amber: #EF9F27;
-  --amber-pale: #FEF3DC;
-  --dark: #111714;
-  --dark2: #1a2420;
-  --gray: #6B7280;
-  --gray-light: #F3F4F6;
-  --white: #ffffff;
-  --border: #E5E7EB;
-  --radius: 12px;
-  --radius-lg: 20px;
+  --teal:#0F6E56;--teal-light:#1D9E75;--teal-pale:#E1F5EE;--teal-mid:#5DCAA5;
+  --amber:#EF9F27;--amber-pale:#FEF3DC;--dark:#111714;--dark2:#1a2420;
+  --gray:#6B7280;--gray-light:#F3F4F6;--white:#fff;--border:#E5E7EB;
+  --radius:12px;--radius-lg:20px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; color: var(--dark); background: var(--white); line-height: 1.6; }
-h1,h2,h3,h4 { font-family: 'Syne', sans-serif; line-height: 1.2; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.6}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.2}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--teal)}
+.logo span{color:var(--amber)}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{text-decoration:none;color:var(--gray);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{background:var(--teal);color:white;padding:8px 18px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--teal-light)}
+.hero{background:var(--dark);padding:80px 5% 70px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(29,158,117,0.15) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(29,158,117,0.15);border:1px solid rgba(29,158,117,0.3);color:var(--teal-mid);font-size:12px;font-weight:600;letter-spacing:.08em;padding:5px 12px;border-radius:50px;margin-bottom:22px;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,3.8vw,52px);font-weight:800;color:white;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--teal-mid)}
+.hero h1 strong{font-style:normal;color:var(--amber)}
+.hero p{color:#9CA3AF;font-size:16px;margin-bottom:32px;max-width:460px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--teal-light);color:white;padding:13px 26px;border-radius:50px;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:transform .15s,background .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--teal);transform:translateY(-1px)}
+.btn-amber{background:var(--amber);color:white;padding:13px 26px;border-radius:50px;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:transform .15s,opacity .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-amber:hover{opacity:.88;transform:translateY(-1px)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px}
+.stat-box .num{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--teal-mid)}
+.stat-box .lbl{font-size:12px;color:#6B7280;margin-top:3px}
+.section-label{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.section-title{font-size:clamp(26px,3vw,38px);font-weight:700;margin-bottom:14px}
+.section-sub{font-size:16px;color:var(--gray);max-width:560px}
+#voos{background:var(--gray-light);padding:80px 5%}
+.search-box{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;margin-top:40px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.search-row{display:grid;grid-template-columns:1fr 1fr 140px 140px auto;gap:12px;align-items:end;margin-bottom:16px}
+.s-group label{display:block;font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.s-group input,.s-group select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;font-family:'Inter',sans-serif;color:var(--dark);outline:none;transition:border-color .2s;background:white}
+.s-group input:focus,.s-group select:focus{border-color:var(--teal-mid)}
+.search-btn{background:var(--teal-light);color:white;border:none;border-radius:var(--radius);padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.search-btn:hover{background:var(--teal)}
+.trip-type{display:flex;gap:16px;margin-bottom:20px}
+.trip-type label{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--gray);cursor:pointer}
+.trip-type input[type=radio]{accent-color:var(--teal)}
+#flight-results{margin-top:28px}
+.flights-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.flights-header h3{font-size:16px;font-weight:600}
+.flights-header span{font-size:13px;color:var(--gray)}
+.flight-card{background:white;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:12px;display:flex;align-items:center;gap:20px;transition:border-color .2s,box-shadow .2s;cursor:pointer;flex-wrap:wrap}
+.flight-card:hover{border-color:var(--teal-mid);box-shadow:0 4px 20px rgba(29,158,117,.08)}
+.flight-card.best{border-color:var(--teal-light);background:var(--teal-pale)}
+.airline-logo{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:white;flex-shrink:0}
+.flight-info{flex:1;min-width:200px}
+.flight-name{font-size:13px;font-weight:600;color:var(--dark)}
+.flight-class{font-size:11px;color:var(--gray);margin-top:2px}
+.flight-badges{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.badge-best{font-size:11px;font-weight:700;background:var(--teal);color:white;padding:2px 8px;border-radius:50px}
+.badge-cheap{font-size:11px;font-weight:700;background:var(--amber);color:white;padding:2px 8px;border-radius:50px}
+.flight-route{display:flex;align-items:center;gap:16px;flex:2;min-width:260px}
+.airport-time{text-align:center}
+.airport-time .time{font-family:'Syne',sans-serif;font-size:22px;font-weight:700}
+.airport-time .iata{font-size:12px;font-weight:700;color:var(--teal);margin-top:2px}
+.airport-time .city{font-size:11px;color:var(--gray)}
+.route-line{flex:1;text-align:center}
+.route-line .dur{font-size:11px;color:var(--gray);margin-bottom:4px}
+.route-line .line{height:1px;background:var(--border);position:relative}
+.route-line .line::after{content:"✈️";position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:14px}
+.route-line .stops{font-size:11px;margin-top:4px}
+.stops-direct{color:var(--teal);font-weight:600}
+.stops-layover{color:var(--amber)}
+.flight-details{display:flex;flex-direction:column;gap:4px;min-width:130px}
+.detail-item{font-size:11px;color:var(--gray);display:flex;align-items:center;gap:4px}
+.detail-code{font-size:12px;color:var(--teal);font-weight:700;background:var(--dark);color:var(--teal-mid);padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;margin-top:2px}
+.flight-price-col{text-align:right;flex-shrink:0}
+.flight-price-col .price{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--teal)}
+.flight-price-col .per{font-size:11px;color:var(--gray);margin-bottom:8px}
+.flight-btn{background:var(--teal-light);color:white;border:none;border-radius:var(--radius);padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;text-decoration:none;display:inline-block}
+.flight-btn:hover{background:var(--teal)}
+.speedmilhas-banner{background:var(--dark);border-radius:var(--radius-lg);padding:28px 32px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.speedmilhas-banner .sb-text h3{color:white;font-size:18px;margin-bottom:6px}
+.speedmilhas-banner .sb-text p{color:#9CA3AF;font-size:14px}
+.speedmilhas-banner .sb-badge{background:var(--amber);color:white;font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;display:inline-block;margin-bottom:8px}
+.btn-speedmilhas{background:var(--amber);color:white;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s;white-space:nowrap}
+.btn-speedmilhas:hover{opacity:.88}
+#tributacao{background:white;padding:80px 5%}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.calc-card{background:var(--gray-light);border-radius:var(--radius-lg);padding:28px}
+.calc-card h3{font-size:18px;font-weight:700;margin-bottom:6px}
+.card-sub{font-size:13px;color:var(--gray);margin-bottom:20px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:500;margin-bottom:5px}
+.form-group input,.form-group select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;outline:none;background:white}
+.form-group input:focus,.form-group select:focus{border-color:var(--teal-mid)}
+.item-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.item-row{display:flex;gap:8px}
+.item-row input{flex:1}
+.item-row button{padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:13px;color:#EF4444}
+.add-btn{width:100%;padding:8px;border-radius:8px;border:1px dashed var(--teal-mid);background:var(--teal-pale);color:var(--teal);font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:12px}
+.calc-btn{width:100%;padding:11px;background:var(--teal-light);color:white;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.calc-result-box{background:var(--dark);border-radius:var(--radius-lg);padding:24px;margin-top:16px;color:white}
+.result-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}
+.r-lbl{color:#9CA3AF}
+.r-val{color:white;font-weight:600}
+.result-total{display:flex;justify-content:space-between;align-items:center;padding-top:14px;margin-top:10px;border-top:1px solid rgba(255,255,255,.15)}
+.t-lbl{font-size:15px;font-weight:600;color:white}
+.t-val{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--teal-mid)}
+.result-alert{margin-top:12px;padding:10px 13px;border-radius:8px;font-size:12px;line-height:1.5}
+.alert-ok{background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.3);color:#5DCAA5}
+.alert-warn{background:rgba(239,159,39,.1);border:1px solid rgba(239,159,39,.3);color:var(--amber)}
+.alert-danger{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#FCA5A5}
+.conv-card{background:var(--dark);border-radius:var(--radius-lg);padding:28px;color:white}
+.conv-card h3{font-size:18px;font-weight:700;margin-bottom:6px;color:white}
+.conv-input{width:100%;padding:14px 16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);font-size:28px;font-family:'Syne',sans-serif;font-weight:700;color:white;outline:none;margin-bottom:12px}
+.conv-input:focus{border-color:var(--teal-mid)}
+.conv-from{width:100%;padding:10px 14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);font-size:14px;font-family:'Inter',sans-serif;color:white;outline:none;margin-bottom:20px}
+.conv-from option{background:#1a2420}
+.moedas-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.moeda-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:14px}
+.m-flag{font-size:20px;margin-bottom:4px}
+.m-name{font-size:11px;color:#9CA3AF;margin-bottom:4px}
+.m-val{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--teal-mid)}
+.m-code{font-size:11px;color:#6B7280}
+.conv-update{font-size:11px;color:#6B7280;margin-top:14px;text-align:center}
+.tax-info{background:var(--amber-pale);border:1px solid #FAC775;border-radius:var(--radius-lg);padding:24px;margin-top:28px}
+.tax-info h3{font-size:17px;font-weight:700;color:var(--dark);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.tax-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.tax-box{background:white;border-radius:var(--radius);padding:16px}
+.tx-label{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.tx-val{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--teal)}
+.tx-desc{font-size:12px;color:var(--gray);margin-top:4px;line-height:1.5}
+.cta-section{background:var(--teal);padding:80px 5%;text-align:center}
+.cta-section h2{font-size:clamp(26px,3vw,40px);font-weight:800;color:white;margin-bottom:14px}
+.cta-section p{font-size:16px;color:rgba(255,255,255,.8);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+.btn-white{background:white;color:var(--teal);padding:14px 28px;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+.btn-white:hover{transform:translateY(-2px)}
+footer{background:var(--dark);color:#6B7280;padding:36px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.loading{display:flex;gap:5px;align-items:center;justify-content:center;padding:40px}
+.loading span{width:8px;height:8px;border-radius:50%;background:var(--teal-mid);animation:ld 1.2s infinite}
+.loading span:nth-child(2){animation-delay:.2s}
+.loading span:nth-child(3){animation-delay:.4s}
+#ranking{background:var(--dark);padding:80px 5%}
+#ranking .section-label{color:var(--teal-mid)}
+#ranking .section-title{color:white}
+#ranking .section-sub{color:#9CA3AF}
+.ranking-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:40px}
+.rank-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:20px;display:flex;align-items:center;gap:16px;transition:border-color .2s;cursor:pointer}
+.rank-card:hover{border-color:var(--teal-mid)}
+.rank-card.rank-1{border-color:gold;background:rgba(255,215,0,.06)}
+.rank-card.rank-2{border-color:silver;background:rgba(192,192,192,.06)}
+.rank-card.rank-3{border-color:#CD7F32;background:rgba(205,127,50,.06)}
+.rank-num{font-family:"Syne",sans-serif;font-size:28px;font-weight:800;min-width:40px;text-align:center}
+.rank-1 .rank-num{color:gold}
+.rank-2 .rank-num{color:silver}
+.rank-3 .rank-num{color:#CD7F32}
+.rank-num.other{color:#6B7280;font-size:20px}
+.rank-info{flex:1}
+.rank-route{font-size:15px;font-weight:700;color:white;margin-bottom:2px}
+.rank-airline{font-size:12px;color:#9CA3AF}
+.rank-details{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.rank-tag{font-size:11px;padding:2px 7px;border-radius:50px;background:rgba(255,255,255,.07);color:#9CA3AF}
+.rank-tag.direct{background:rgba(29,158,117,.15);color:var(--teal-mid)}
+.rank-price{text-align:right;flex-shrink:0}
+.rank-price .rp{font-family:"Syne",sans-serif;font-size:20px;font-weight:700;color:var(--teal-mid)}
+.rank-price .rper{font-size:11px;color:#6B7280}
+#edbv{background:var(--gray-light);padding:80px 5%}
+.edbv-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:48px;align-items:start}
+.edbv-info h3{font-size:22px;font-weight:700;margin-bottom:12px}
+.edbv-info p{color:var(--gray);font-size:15px;margin-bottom:20px;line-height:1.7}
+.edbv-steps{display:flex;flex-direction:column;gap:12px}
+.edbv-step{display:flex;gap:12px;align-items:flex-start;padding:14px;background:white;border-radius:var(--radius);border:1px solid var(--border)}
+.edbv-step .snum{width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.edbv-step .stxt{font-size:13px;color:var(--dark);line-height:1.5}
+.edbv-step .stxt strong{color:var(--teal)}
+.edbv-card{background:var(--dark);border-radius:var(--radius-lg);padding:28px;color:white}
+.edbv-card h3{font-size:18px;font-weight:700;margin-bottom:16px}
+.edbv-alert{background:rgba(239,159,39,.1);border:1px solid rgba(239,159,39,.3);border-radius:var(--radius);padding:14px;margin-bottom:20px;font-size:13px;color:var(--amber);line-height:1.6}
+.edbv-limit-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.edbv-limit{background:rgba(255,255,255,.05);border-radius:var(--radius);padding:14px}
+.edbv-limit .el-val{font-family:"Syne",sans-serif;font-size:22px;font-weight:700;color:var(--teal-mid)}
+.edbv-limit .el-lbl{font-size:11px;color:#9CA3AF;margin-top:2px}
+.btn-edbv{display:block;width:100%;padding:13px;background:var(--teal-light);color:white;border:none;border-radius:var(--radius);font-size:15px;font-weight:600;text-align:center;text-decoration:none;cursor:pointer;transition:background .2s;font-family:"Inter",sans-serif}
+.btn-edbv:hover{background:var(--teal)}
+.edbv-note{font-size:11px;color:#6B7280;margin-top:10px;text-align:center;line-height:1.5}
+@keyframes ld{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
 
-/* NAV */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.96); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px;
-}
-.logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--teal); }
-.logo span { color: var(--amber); }
-.nav-links { display: flex; gap: 24px; align-items: center; }
-.nav-links a { text-decoration: none; color: var(--gray); font-size: 14px; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--teal); }
-.nav-cta { background: var(--teal); color: white; padding: 8px 18px; border-radius: 50px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
-.nav-cta:hover { background: var(--teal-light); }
-
-/* HERO */
-.hero {
-  background: var(--dark); padding: 80px 5% 70px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-  position: relative; overflow: hidden;
-}
-.hero::before {
-  content: ''; position: absolute; top: -100px; right: -100px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(29,158,117,0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(29,158,117,0.15); border: 1px solid rgba(29,158,117,0.3);
-  color: var(--teal-mid); font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
-  padding: 5px 12px; border-radius: 50px; margin-bottom: 22px; text-transform: uppercase;
-}
-.hero h1 { font-size: clamp(32px, 3.8vw, 52px); font-weight: 800; color: white; margin-bottom: 18px; }
-.hero h1 em { font-style: normal; color: var(--teal-mid); }
-.hero h1 strong { font-style: normal; color: var(--amber); }
-.hero p { color: #9CA3AF; font-size: 16px; margin-bottom: 32px; max-width: 460px; }
-.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn-primary { background: var(--teal-light); color: white; padding: 13px 26px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: transform 0.15s, background 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-.btn-primary:hover { background: var(--teal); transform: translateY(-1px); }
-.btn-amber { background: var(--amber); color: white; padding: 13px 26px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: transform 0.15s, opacity 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-.btn-amber:hover { opacity: 0.88; transform: translateY(-1px); }
-
-/* HERO STATS */
-.hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.stat-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 18px; }
-.stat-box .num { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 700; color: var(--teal-mid); }
-.stat-box .lbl { font-size: 12px; color: #6B7280; margin-top: 3px; }
-
-/* SECTION COMMON */
-.section-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
-.section-title { font-size: clamp(26px, 3vw, 38px); font-weight: 700; margin-bottom: 14px; }
-.section-sub { font-size: 16px; color: var(--gray); max-width: 560px; }
-
-/* BUSCA VOOS */
-#voos { background: var(--gray-light); padding: 80px 5%; }
-.search-box {
-  background: white; border: 1px solid var(--border); border-radius: var(--radius-lg);
-  padding: 28px; margin-top: 40px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-}
-.search-row { display: grid; grid-template-columns: 1fr 1fr 140px 140px auto; gap: 12px; align-items: end; margin-bottom: 16px; }
-.s-group label { display: block; font-size: 12px; font-weight: 600; color: var(--gray); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
-.s-group input, .s-group select {
-  width: 100%; padding: 11px 14px; border: 1.5px solid var(--border);
-  border-radius: var(--radius); font-size: 14px; font-family: 'Inter', sans-serif;
-  color: var(--dark); outline: none; transition: border-color 0.2s; background: white;
-}
-.s-group input:focus, .s-group select:focus { border-color: var(--teal-mid); }
-.search-btn {
-  background: var(--teal-light); color: white; border: none; border-radius: var(--radius);
-  padding: 11px 22px; font-size: 14px; font-weight: 600; cursor: pointer;
-  font-family: 'Inter', sans-serif; transition: background 0.2s; white-space: nowrap;
-  display: flex; align-items: center; gap: 6px;
-}
-.search-btn:hover { background: var(--teal); }
-.trip-type { display: flex; gap: 16px; margin-bottom: 20px; }
-.trip-type label { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--gray); cursor: pointer; }
-.trip-type input[type=radio] { accent-color: var(--teal); }
-
-/* RESULTADOS VOOS */
-#flight-results { margin-top: 28px; }
-.flights-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.flights-header h3 { font-size: 16px; font-weight: 600; }
-.flights-header span { font-size: 13px; color: var(--gray); }
-.flight-card {
-  background: white; border: 1.5px solid var(--border); border-radius: var(--radius-lg);
-  padding: 20px 24px; margin-bottom: 12px;
-  display: grid; grid-template-columns: 1fr auto auto; gap: 20px; align-items: center;
-  transition: border-color 0.2s, box-shadow 0.2s; cursor: pointer;
-}
-.flight-card:hover { border-color: var(--teal-mid); box-shadow: 0 4px 20px rgba(29,158,117,0.08); }
-.flight-card.best { border-color: var(--teal-light); background: var(--teal-pale); }
-.flight-route { display: flex; align-items: center; gap: 16px; }
-.airport { text-align: center; }
-.airport .code { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--dark); }
-.airport .city { font-size: 11px; color: var(--gray); margin-top: 2px; }
-.airport .time { font-size: 15px; font-weight: 600; color: var(--dark); margin-top: 4px; }
-.flight-line { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.flight-line .duration { font-size: 12px; color: var(--gray); }
-.flight-line .line { width: 100%; height: 1px; background: var(--border); position: relative; }
-.flight-line .line::before { content: '✈'; position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--teal); }
-.flight-line .stops { font-size: 11px; color: var(--gray); }
-.flight-airline { font-size: 13px; color: var(--gray); margin-top: 6px; }
-.flight-price .price { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: var(--teal); }
-.flight-price .per { font-size: 12px; color: var(--gray); }
-.flight-price .tag { font-size: 11px; background: var(--teal-pale); color: var(--teal); padding: 2px 8px; border-radius: 50px; margin-top: 4px; display: inline-block; font-weight: 600; }
-.flight-btn { background: var(--teal-light); color: white; border: none; border-radius: var(--radius); padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-.flight-btn:hover { background: var(--teal); }
-
-/* BANNER SPEEDMILHAS */
-.speedmilhas-banner {
-  background: var(--dark); border-radius: var(--radius-lg);
-  padding: 28px 32px; margin-top: 20px;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  flex-wrap: wrap;
-}
-.speedmilhas-banner .sb-text h3 { color: white; font-size: 18px; margin-bottom: 6px; }
-.speedmilhas-banner .sb-text p { color: #9CA3AF; font-size: 14px; }
-.speedmilhas-banner .sb-badge { background: var(--amber); color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; display: inline-block; margin-bottom: 8px; }
-.btn-speedmilhas { background: var(--amber); color: white; padding: 12px 24px; border-radius: 50px; font-size: 14px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s; white-space: nowrap; }
-.btn-speedmilhas:hover { opacity: 0.88; }
-
-/* TRIBUTAÇÃO */
-#tributacao { background: white; padding: 80px 5%; }
-.tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
-
-/* CALCULADORA ALFÂNDEGA */
-.calc-card { background: var(--gray-light); border-radius: var(--radius-lg); padding: 28px; }
-.calc-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-.calc-card .card-sub { font-size: 13px; color: var(--gray); margin-bottom: 20px; }
-.form-group { margin-bottom: 14px; }
-.form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 5px; }
-.form-group input, .form-group select { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; background: white; }
-.form-group input:focus, .form-group select:focus { border-color: var(--teal-mid); }
-.item-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-.item-row { display: flex; gap: 8px; }
-.item-row input { flex: 1; }
-.item-row button { padding: 9px 12px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor: pointer; font-size: 13px; color: #EF4444; }
-.add-btn { width: 100%; padding: 8px; border-radius: 8px; border: 1px dashed var(--teal-mid); background: var(--teal-pale); color: var(--teal); font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; margin-bottom: 12px; }
-.calc-btn { width: 100%; padding: 11px; background: var(--teal-light); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
-.calc-result-box { background: var(--dark); border-radius: var(--radius-lg); padding: 24px; margin-top: 16px; color: white; }
-.result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 13px; }
-.result-row .r-lbl { color: #9CA3AF; }
-.result-row .r-val { color: white; font-weight: 600; }
-.result-total { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); }
-.result-total .t-lbl { font-size: 15px; font-weight: 600; color: white; }
-.result-total .t-val { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: var(--teal-mid); }
-.result-alert { margin-top: 12px; padding: 10px 13px; border-radius: 8px; font-size: 12px; line-height: 1.5; }
-.result-alert.ok { background: rgba(29,158,117,0.1); border: 1px solid rgba(29,158,117,0.3); color: #5DCAA5; }
-.result-alert.warn { background: rgba(239,159,39,0.1); border: 1px solid rgba(239,159,39,0.3); color: var(--amber); }
-.result-alert.danger { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #FCA5A5; }
-
-/* CONVERSOR */
-.conv-card { background: var(--dark); border-radius: var(--radius-lg); padding: 28px; color: white; }
-.conv-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: white; }
-.conv-card .card-sub { font-size: 13px; color: #9CA3AF; margin-bottom: 20px; }
-.conv-input { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); font-size: 28px; font-family: 'Syne', sans-serif; font-weight: 700; color: white; outline: none; margin-bottom: 12px; }
-.conv-input:focus { border-color: var(--teal-mid); }
-.conv-from { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); font-size: 14px; font-family: 'Inter', sans-serif; color: white; outline: none; margin-bottom: 20px; }
-.conv-from option { background: #1a2420; }
-.moedas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.moeda-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 14px; }
-.moeda-box .m-flag { font-size: 20px; margin-bottom: 4px; }
-.moeda-box .m-name { font-size: 11px; color: #9CA3AF; margin-bottom: 4px; }
-.moeda-box .m-val { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--teal-mid); }
-.moeda-box .m-code { font-size: 11px; color: #6B7280; }
-.conv-update { font-size: 11px; color: #6B7280; margin-top: 14px; text-align: center; }
-
-/* INFO TRIBUTARIA */
-.tax-info { background: var(--amber-pale); border: 1px solid #FAC775; border-radius: var(--radius-lg); padding: 24px; margin-top: 28px; }
-.tax-info h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.tax-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-.tax-box { background: white; border-radius: var(--radius); padding: 16px; }
-.tax-box .tx-label { font-size: 11px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-.tax-box .tx-val { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--teal); }
-.tax-box .tx-desc { font-size: 12px; color: var(--gray); margin-top: 4px; line-height: 1.5; }
-
-/* CTA */
-.cta-section { background: var(--teal); padding: 80px 5%; text-align: center; }
-.cta-section h2 { font-size: clamp(26px, 3vw, 40px); font-weight: 800; color: white; margin-bottom: 14px; }
-.cta-section p { font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
-.btn-white { background: white; color: var(--teal); padding: 14px 28px; border-radius: 50px; font-size: 15px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.15s; }
-.btn-white:hover { transform: translateY(-2px); }
-
-/* FOOTER */
-footer { background: var(--dark); color: #6B7280; padding: 36px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-footer .logo { font-size: 18px; }
-
-/* LOADING */
-.loading { display: flex; gap: 5px; align-items: center; justify-content: center; padding: 40px; }
-.loading span { width: 8px; height: 8px; border-radius: 50%; background: var(--teal-mid); animation: ld 1.2s infinite; }
-.loading span:nth-child(2) { animation-delay: .2s; }
-.loading span:nth-child(3) { animation-delay: .4s; }
-@keyframes ld { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-8px)} }
-
-@media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; padding: 50px 5% 40px; }
-  .hero-stats { display: none; }
-  .search-row { grid-template-columns: 1fr 1fr; }
-  .search-row .s-group:last-child { grid-column: 1/-1; }
-  .tools-grid { grid-template-columns: 1fr; }
-  .moedas-grid { grid-template-columns: 1fr 1fr; }
-  .nav-links { display: none; }
-  .flight-card { grid-template-columns: 1fr; }
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding:50px 5% 40px}
+  .hero-stats{display:none}
+  .search-row{grid-template-columns:1fr 1fr}
+  .search-row .s-group:last-child{grid-column:1/-1}
+  .tools-grid{grid-template-columns:1fr}
+  .moedas-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .flight-card{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">Roteir<span>IA</span></div>
+  <div class="logo">Tax<span>Pay</span></div>
   <div class="nav-links">
     <a href="#voos">Buscar Voos</a>
-    <a href="#tributacao">Alfândega & Câmbio</a>
+    <a href="#ranking">Top 10</a><a href="#tributacao">Alfândega e Câmbio</a><a href="#edbv">e-DBV</a>
   </div>
-  <a href="#voos" class="nav-cta">🔍 Buscar voos</a>
+  <a href="#voos" class="nav-cta">Buscar voos</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div>
-    <div class="hero-eyebrow">✈️ Voos + Inteligência Tributária</div>
+    <div class="hero-eyebrow">Voos + Inteligência Tributária</div>
     <h1>Voe mais barato.<br><em>Traga mais</em> sem pagar <strong>multa.</strong></h1>
     <p>Compare voos em tempo real e use nossas ferramentas tributárias para saber exatamente quanto pode trazer do exterior sem surpresas na alfândega.</p>
     <div class="hero-btns">
-      <a href="#voos" class="btn-primary">🔍 Buscar voos agora</a>
-      <a href="#tributacao" class="btn-amber">🛃 Calcular alfândega</a>
+      <a href="#voos" class="btn-primary">Buscar voos agora</a>
+      <a href="#tributacao" class="btn-amber">Calcular alfândega</a>
     </div>
   </div>
   <div class="hero-stats">
@@ -266,12 +237,10 @@ footer .logo { font-size: 18px; }
   </div>
 </section>
 
-<!-- BUSCA DE VOOS -->
 <section id="voos">
   <div class="section-label">Busca de voos</div>
   <div class="section-title">Encontre o menor preço</div>
   <div class="section-sub">Compare rotas e preços — depois finalize sua compra.</div>
-
   <div class="search-box">
     <div class="trip-type">
       <label><input type="radio" name="trip" value="ida-volta" checked onchange="updateTrip()"> Ida e volta</label>
@@ -280,52 +249,48 @@ footer .logo { font-size: 18px; }
     <div class="search-row">
       <div class="s-group">
         <label>Origem</label>
-        <input type="text" id="origem" placeholder="Ex: São Paulo (GRU)" value="São Paulo (GRU)" />
+        <input type="text" id="origem" placeholder="Ex: São Paulo (GRU)" value="São Paulo (GRU)">
       </div>
       <div class="s-group">
         <label>Destino</label>
-        <input type="text" id="destino" placeholder="Ex: Miami (MIA)" />
+        <input type="text" id="destino" placeholder="Ex: Miami (MIA)">
       </div>
       <div class="s-group">
         <label>Ida</label>
-        <input type="date" id="data-ida" />
+        <input type="date" id="data-ida">
       </div>
       <div class="s-group" id="volta-group">
         <label>Volta</label>
-        <input type="date" id="data-volta" />
+        <input type="date" id="data-volta">
       </div>
       <div class="s-group">
         <label>&nbsp;</label>
-        <button class="search-btn" onclick="buscarVoos()">🔍 Buscar</button>
+        <button class="search-btn" onclick="buscarVoos()">Buscar</button>
       </div>
     </div>
   </div>
-
   <div id="flight-results"></div>
 </section>
 
-<!-- TRIBUTAÇÃO -->
 <section id="tributacao">
   <div class="section-label">Inteligência Tributária</div>
   <div class="section-title">Traga mais, pague menos</div>
-  <div class="section-sub">Ferramentas exclusivas para viajantes frequentes — saiba exatamente quanto pode comprar no exterior.</div>
-
+  <div class="section-sub">Ferramentas para viajantes frequentes — saiba quanto pode comprar no exterior.</div>
   <div class="tools-grid">
-    <!-- CALCULADORA -->
     <div>
       <div class="calc-card">
-        <h3>🛃 Calculadora de Alfândega</h3>
+        <h3>Calculadora de Alfândega</h3>
         <div class="card-sub">Simule seus gastos e veja se vai pagar imposto na volta</div>
         <div class="form-group">
           <label>Modal de transporte</label>
           <select id="modal" onchange="calcular()">
-            <option value="aereo">✈️ Aéreo/Marítimo — isenção até US$ 1.000</option>
-            <option value="terrestre">🚌 Terrestre/Fluvial — isenção até US$ 500</option>
+            <option value="aereo">Aéreo/Marítimo — isenção até US$ 1.000</option>
+            <option value="terrestre">Terrestre/Fluvial — isenção até US$ 500</option>
           </select>
         </div>
         <div class="form-group">
           <label>Câmbio do dólar (R$)</label>
-          <input type="number" id="cambio" value="5.50" step="0.01" oninput="calcular()" />
+          <input type="number" id="cambio" value="5.50" step="0.01" oninput="calcular()">
         </div>
         <div id="items-list" class="item-list"></div>
         <button class="add-btn" onclick="addItem()">+ Adicionar item</button>
@@ -333,339 +298,413 @@ footer .logo { font-size: 18px; }
         <div id="calc-result"></div>
       </div>
     </div>
-
-    <!-- CONVERSOR -->
     <div>
       <div class="conv-card">
-        <h3>💱 Conversor de Moedas</h3>
-        <div class="card-sub">Converta reais para as principais moedas do mundo</div>
-        <input class="conv-input" type="number" id="conv-valor" value="1000" oninput="converter()" placeholder="R$ 0,00" />
+        <h3>Conversor de Moedas</h3>
+        <div class="card-sub" style="color:#9CA3AF">Converta reais para as principais moedas do mundo</div>
+        <input class="conv-input" type="number" id="conv-valor" value="1000" oninput="converter()">
         <select class="conv-from" id="conv-de" onchange="converter()">
-          <option value="BRL">🇧🇷 Real Brasileiro (BRL)</option>
-          <option value="USD">🇺🇸 Dólar Americano (USD)</option>
-          <option value="EUR">🇪🇺 Euro (EUR)</option>
+          <option value="BRL">Real Brasileiro (BRL)</option>
+          <option value="USD">Dólar Americano (USD)</option>
+          <option value="EUR">Euro (EUR)</option>
         </select>
         <div class="moedas-grid" id="moedas-grid"></div>
         <div class="conv-update" id="conv-update">Carregando cotações...</div>
       </div>
     </div>
   </div>
-
-  <!-- INFO TRIBUTÁRIA -->
   <div class="tax-info">
-    <h3>⚖️ Regras da Alfândega — Resumo do Especialista</h3>
+    <h3>Regras da Alfândega — Resumo do Especialista</h3>
     <p style="font-size:13px;color:#7C5A06;margin-bottom:16px;">
-      Fonte: 
-      <a href="https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/viagens-internacionais" target="_blank" style="color:var(--teal);font-weight:600;text-decoration:none;">
-        Receita Federal do Brasil — Legislação Aduaneira ↗
-      </a>
-      · Última atualização: 2024. Consulte sempre o site oficial para informações vigentes.
+      Fonte: <a href="https://www.gov.br/pt-br/servicos/declarar-bens-para-viagem-internacional-dbv" target="_blank" style="color:var(--teal);font-weight:600;text-decoration:none;">Receita Federal do Brasil - Legislação Aduaneira</a>
+      - Consulte sempre o site oficial para informações vigentes.
     </p>
     <div class="tax-grid">
-      <div class="tax-box">
-        <div class="tx-label">Isenção Aérea</div>
-        <div class="tx-val">US$ 1.000</div>
-        <div class="tx-desc">Por pessoa, por viagem (via aérea ou marítima). Inclui presentes e itens de uso pessoal.</div>
+      <div class="tax-box"><div class="tx-label">Isenção Aérea/Marítima</div><div class="tx-val">US$ 1.000</div><div class="tx-desc">Por pessoa, por viagem. Inclui presentes e itens de uso pessoal.</div></div>
+      <div class="tax-box"><div class="tx-label">Isenção Terrestre/Fluvial</div><div class="tx-val">US$ 500</div><div class="tx-desc">Para entradas por via terrestre ou fluvial.</div></div>
+      <div class="tax-box"><div class="tx-label">Imposto sobre Excesso</div><div class="tx-val">50%</div><div class="tx-desc">Incide sobre o valor que ultrapassar o limite de isenção.</div></div>
+      <div class="tax-box"><div class="tx-label">Duty Free — Chegada</div><div class="tx-val">US$ 1.000</div><div class="tx-desc">Cota adicional para compras nas lojas duty free do aeroporto de chegada no Brasil.</div></div>
+      <div class="tax-box"><div class="tx-label">Remessa Internacional</div><div class="tx-val">US$ 50</div><div class="tx-desc">Compras em e-commerce internacional tributadas a 20% sobre o valor total.</div></div>
+      <div class="tax-box"><div class="tx-label">Dica do Especialista</div><div class="tx-val">Familia</div><div class="tx-desc">Cada pessoa tem direito ao próprio limite. Viajando em família, multiplique e planeje com antecedência!</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="ranking">
+  <div class="section-label">Top 10 Passagens</div>
+  <div class="section-title">Melhores preços do momento</div>
+  <div class="section-sub">Ranking atualizado com as passagens mais baratas saindo do Brasil agora.</div>
+  <div class="ranking-grid" id="ranking-grid"></div>
+</section>
+
+<section id="edbv">
+  <div class="section-label">Declaração de Bens</div>
+  <div class="section-title">e-DBV — Declare seus bens com segurança</div>
+  <div class="section-sub">A Declaração Eletrônica de Bens do Viajante é obrigatória quando suas compras ultrapassam o limite de isenção.</div>
+  <div class="edbv-grid">
+    <div class="edbv-info">
+      <h3>O que é a e-DBV?</h3>
+      <p>A <strong>e-DBV</strong> (Declaração Eletrônica de Bens do Viajante) é o sistema oficial da Receita Federal para declarar bens adquiridos no exterior ao retornar ao Brasil. Pode ser preenchida pelo celular antes mesmo de desembarcar.</p>
+      <p>Declarar corretamente evita multas de <strong>50% sobre o valor dos bens</strong> além do imposto devido — ou seja, você pode pagar até <strong>100% do valor</strong> se for flagrado sem declarar.</p>
+      <div class="edbv-steps">
+        <div class="edbv-step"><div class="snum">1</div><div class="stxt">Baixe o app <strong>e-DBV</strong> da Receita Federal (disponível para iOS e Android) ou acesse pelo site</div></div>
+        <div class="edbv-step"><div class="snum">2</div><div class="stxt">Faça login com sua conta <strong>Gov.br</strong> (CPF + senha)</div></div>
+        <div class="edbv-step"><div class="snum">3</div><div class="stxt">Informe todos os bens adquiridos com descrição e <strong>valor em dólar</strong></div></div>
+        <div class="edbv-step"><div class="snum">4</div><div class="stxt">O sistema calcula o imposto automaticamente — pague via <strong>PIX ou cartão</strong> na hora</div></div>
+        <div class="edbv-step"><div class="snum">5</div><div class="stxt">Guarde o comprovante e apresente ao fiscal no <strong>canal vermelho</strong> se solicitado</div></div>
       </div>
-      <div class="tax-box">
-        <div class="tx-label">Isenção Terrestre</div>
-        <div class="tx-val">US$ 500</div>
-        <div class="tx-desc">Para entradas por via terrestre ou fluvial.</div>
-      </div>
-      <div class="tax-box">
-        <div class="tx-label">Imposto sobre Excesso</div>
-        <div class="tx-val">50%</div>
-        <div class="tx-desc">Incide sobre o valor que ultrapassar o limite de isenção.</div>
-      </div>
-      <div class="tax-box">
-        <div class="tx-label">Limite por Encomenda</div>
-        <div class="tx-val">US$ 50</div>
-        <div class="tx-desc">Para compras internacionais enviadas por pessoa física para pessoa física.</div>
-      </div>
-      <div class="tax-box">
-        <div class="tx-label">Remessa Internacional</div>
-        <div class="tx-val">US$ 50</div>
-        <div class="tx-desc">Compras em lojas internacionais (e-commerce) tributadas a 20% sobre o valor total.</div>
-      </div>
-      <div class="tax-box">
-        <div class="tx-label">Dica do Especialista</div>
-        <div class="tx-val">💡</div>
-        <div class="tx-desc">Viajando em família? Cada pessoa tem direito ao próprio limite — multiplique e planeje com antecedência.</div>
+    </div>
+    <div>
+      <div class="edbv-card">
+        <h3>⚠️ Quando preciso declarar?</h3>
+        <div class="edbv-alert">Você é obrigado a ir ao canal vermelho e declarar se suas compras ultrapassarem o limite de isenção OU se estiver portando mais de US$ 10.000 em espécie.</div>
+        <div class="edbv-limit-grid">
+          <div class="edbv-limit"><div class="el-val">US$ 1.000</div><div class="el-lbl">Limite aéreo/marítimo</div></div>
+          <div class="edbv-limit"><div class="el-val">US$ 500</div><div class="el-lbl">Limite terrestre/fluvial</div></div>
+          <div class="edbv-limit"><div class="el-val">50%</div><div class="el-lbl">Imposto sobre excesso</div></div>
+          <div class="edbv-limit"><div class="el-val">+50%</div><div class="el-lbl">Multa por não declarar</div></div>
+        </div>
+        <a href="https://www.edbv.receita.fazenda.gov.br/" target="_blank" class="btn-edbv">Acessar e-DBV — edbv.receita.fazenda.gov.br</a>
+        <p class="edbv-note">Sistema oficial da Receita Federal. Também disponível pelo app "Viajantes" no celular. O TaxPay não armazena nem processa suas declarações.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
   <h2>Pronto para comprar sua passagem?</h2>
-  <p>Use nossas ferramentas para planejar os gastos e finalize sua compra no portal SpeedMilhas.</p>
-  <a href="https://portal.speedmilhas.com/logar" class="btn-white" target="_blank">✈️ Acessar portal SpeedMilhas</a>
+  <p>Fale com nosso especialista no WhatsApp e receba atendimento personalizado para emitir sua passagem.</p>
+  <a href="https://wa.me/5511974566332?text=Ola!%20Vim%20pelo%20TaxPay%20e%20quero%20ajuda%20para%20comprar%20minha%20passagem." class="btn-white" target="_blank">💬 Falar com especialista no WhatsApp</a>
 </section>
 
 <footer>
-  <div class="logo">Roteir<span style="color:var(--amber)">IA</span></div>
-  <p>© 2025 RoteirIA — Voos + Inteligência Tributária para Viajantes</p>
-  <p style="font-size:12px;">As cotações são aproximadas. Consulte sempre a Receita Federal para informações oficiais.</p>
+  <div class="logo">Tax<span style="color:var(--amber)">Pay</span></div>
+  <p>2025 TaxPay - Voos + Inteligência Tributária para Viajantes</p>
+  <p style="font-size:12px;">Cotações aproximadas. Consulte a Receita Federal para informações oficiais.</p>
 </footer>
 
 <script>
-// ===================== DATAS DEFAULT =====================
-const hoje = new Date();
-const daqui30 = new Date(hoje); daqui30.setDate(hoje.getDate()+30);
-const daqui37 = new Date(hoje); daqui37.setDate(hoje.getDate()+37);
-document.getElementById('data-ida').value = daqui30.toISOString().split('T')[0];
-document.getElementById('data-volta').value = daqui37.toISOString().split('T')[0];
-document.getElementById('data-ida').min = hoje.toISOString().split('T')[0];
+// DATAS
+var hoje = new Date();
+var d30 = new Date(hoje); d30.setDate(hoje.getDate()+30);
+var d37 = new Date(hoje); d37.setDate(hoje.getDate()+37);
+document.getElementById("data-ida").value = d30.toISOString().split("T")[0];
+document.getElementById("data-volta").value = d37.toISOString().split("T")[0];
+document.getElementById("data-ida").min = hoje.toISOString().split("T")[0];
 
 function updateTrip() {
-  const ida = document.querySelector('input[name=trip]:checked').value === 'ida';
-  document.getElementById('volta-group').style.opacity = ida ? '0.3' : '1';
-  document.getElementById('data-volta').disabled = ida;
+  var el = document.querySelector("input[name=trip]:checked");
+  var ida = el && el.value === "ida";
+  document.getElementById("volta-group").style.opacity = ida ? "0.3" : "1";
+  document.getElementById("data-volta").disabled = ida;
 }
 
-// ===================== LOGOS COMPANHIAS =====================
-const AIRLINE_COLORS = {
-  'LATAM':'#E31837','American Airlines':'#0078D2','Azul':'#003087',
-  'Copa Airlines':'#00539B','TAP Air Portugal':'#C8102E','Iberia':'#D22630',
-  'Air France':'#002157','Gol':'#FF5F01','Air Europa':'#0055A4','DEFAULT':'#1D9E75'
-};
-
-function airlineLogo(name) {
-  const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  const color = Object.keys(AIRLINE_COLORS).find(k => name.includes(k.split(' ')[0]));
-  const bg = color ? AIRLINE_COLORS[color] : AIRLINE_COLORS['DEFAULT'];
-  return '<div style="width:40px;height:40px;border-radius:8px;background:'+bg+';color:white;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-size:13px;font-weight:700;flex-shrink:0;">'+initials+'</div>';
-}
-
-// ===================== BUSCA VOOS =====================
-const VOOS_MOCK = {
-  'GRU-MIA': [
-    { airline:'LATAM Airlines', code:'LA 8082', dep:'08:30', arr:'16:45', dur:'9h15', stops:'Direto', price:2890, tag:'Melhor preço', bagagem:'1 mala 23kg', cabine:'Mochila + bolsa', classe:'Econômica' },
-    { airline:'American Airlines', code:'AA 951', dep:'10:15', arr:'19:30', dur:'9h15', stops:'Direto', price:3240, tag:'', bagagem:'1 mala 23kg', cabine:'Bagagem de mão', classe:'Econômica' },
-    { airline:'Azul + JetBlue', code:'AD 4102', dep:'06:00', arr:'18:20', dur:'12h20', stops:'1 parada', price:2450, tag:'Mais barato', bagagem:'Sem mala despachada', cabine:'Bagagem de mão', classe:'Econômica Basic' },
-    { airline:'Copa Airlines', code:'CM 709', dep:'14:30', arr:'06:10+1', dur:'15h40', stops:'1 parada', price:2650, tag:'', bagagem:'1 mala 23kg', cabine:'Bagagem de mão', classe:'Econômica' },
+// VOOS
+var VOOS = {
+  "GRU-MIA": [
+    {airline:"LATAM Airlines", color:"#E31837", code:"LA 8082", dep:"08:30", arr:"16:45", dur:"9h15", stops:"Direto", price:2890, best:true, cheap:false, bagagem:"1 mala 23kg", cabine:"Mochila + bolsa", classe:"Econômica"},
+    {airline:"American Airlines", color:"#0078D2", code:"AA 951", dep:"10:15", arr:"19:30", dur:"9h15", stops:"Direto", price:3240, best:false, cheap:false, bagagem:"1 mala 23kg", cabine:"Bagagem de mão", classe:"Econômica"},
+    {airline:"Azul + JetBlue", color:"#003087", code:"AD 4102", dep:"06:00", arr:"18:20", dur:"12h20", stops:"1 parada", price:2450, best:false, cheap:true, bagagem:"Sem mala despachada", cabine:"Bagagem de mão", classe:"Econômica Basic"},
+    {airline:"Copa Airlines", color:"#00539B", code:"CM 709", dep:"14:30", arr:"06:10+1", dur:"15h40", stops:"1 parada", price:2650, best:false, cheap:false, bagagem:"1 mala 23kg", cabine:"Bagagem de mão", classe:"Econômica"}
   ],
-  'GRU-LIS': [
-    { airline:'TAP Air Portugal', code:'TP 084', dep:'22:30', arr:'12:45+1', dur:'10h15', stops:'Direto', price:3100, tag:'Melhor preço', bagagem:'1 mala 23kg', cabine:'Bagagem de mão', classe:'Econômica' },
-    { airline:'LATAM Airlines', code:'LA 8002', dep:'21:00', arr:'11:30+1', dur:'10h30', stops:'Direto', price:3480, tag:'', bagagem:'1 mala 23kg', cabine:'Mochila + bolsa', classe:'Econômica Plus' },
-    { airline:'Iberia', code:'IB 6831', dep:'23:55', arr:'18:20+1', dur:'18h25', stops:'1 parada', price:2780, tag:'Mais barato', bagagem:'Sem mala despachada', cabine:'Bagagem de mão', classe:'Econômica Basic' },
+  "GRU-LIS": [
+    {airline:"TAP Air Portugal", color:"#C8102E", code:"TP 084", dep:"22:30", arr:"12:45+1", dur:"10h15", stops:"Direto", price:3100, best:true, cheap:false, bagagem:"1 mala 23kg", cabine:"Bagagem de mão", classe:"Econômica"},
+    {airline:"LATAM Airlines", color:"#E31837", code:"LA 8002", dep:"21:00", arr:"11:30+1", dur:"10h30", stops:"Direto", price:3480, best:false, cheap:false, bagagem:"1 mala 23kg", cabine:"Mochila + bolsa", classe:"Econômica Plus"},
+    {airline:"Iberia", color:"#D22630", code:"IB 6831", dep:"23:55", arr:"18:20+1", dur:"18h25", stops:"1 parada", price:2780, best:false, cheap:true, bagagem:"Sem mala despachada", cabine:"Bagagem de mão", classe:"Econômica Basic"}
   ],
-  'GRU-MAD': [
-    { airline:'Iberia', code:'IB 6403', dep:'21:45', arr:'14:20+1', dur:'10h35', stops:'Direto', price:3650, tag:'Melhor preço', bagagem:'1 mala 23kg', cabine:'Bagagem de mão', classe:'Econômica' },
-    { airline:'Air Europa', code:'UX 042', dep:'23:30', arr:'16:10+1', dur:'10h40', stops:'Direto', price:3420, tag:'Mais barato', bagagem:'1 mala 23kg', cabine:'Bagagem de mão', classe:'Econômica' },
+  "GRU-MAD": [
+    {airline:"Iberia", color:"#D22630", code:"IB 6403", dep:"21:45", arr:"14:20+1", dur:"10h35", stops:"Direto", price:3650, best:true, cheap:false, bagagem:"1 mala 23kg", cabine:"Bagagem de mão", classe:"Econômica"},
+    {airline:"Air Europa", color:"#0055A4", code:"UX 042", dep:"23:30", arr:"16:10+1", dur:"10h40", stops:"Direto", price:3420, best:false, cheap:true, bagagem:"1 mala 23kg", cabine:"Bagagem de mão", classe:"Econômica"}
   ],
-  'GRU-CDG': [
-    { airline:'Air France', code:'AF 447', dep:'23:05', arr:'17:10+1', dur:'12h05', stops:'Direto', price:4200, tag:'Melhor preço', bagagem:'1 mala 23kg', cabine:'Bagagem de mão', classe:'Econômica' },
-    { airline:'LATAM Airlines', code:'LA 704', dep:'22:30', arr:'19:45+1', dur:'15h15', stops:'1 parada', price:3680, tag:'Mais barato', bagagem:'Sem mala despachada', cabine:'Bagagem de mão', classe:'Econômica Basic' },
+  "GRU-CDG": [
+    {airline:"Air France", color:"#002157", code:"AF 447", dep:"23:05", arr:"17:10+1", dur:"12h05", stops:"Direto", price:4200, best:true, cheap:false, bagagem:"1 mala 23kg", cabine:"Bagagem de mão", classe:"Econômica"},
+    {airline:"LATAM Airlines", color:"#E31837", code:"LA 704", dep:"22:30", arr:"19:45+1", dur:"15h15", stops:"1 parada", price:3680, best:false, cheap:true, bagagem:"Sem mala despachada", cabine:"Bagagem de mão", classe:"Econômica Basic"}
   ],
-  'DEFAULT': [
-    { airline:'LATAM Airlines', code:'LA 001', dep:'08:00', arr:'18:00', dur:'10h00', stops:'Direto', price:3200, tag:'Melhor preço', bagagem:'1 mala 23kg', cabine:'Mochila + bolsa', classe:'Econômica' },
-    { airline:'Gol Linhas Aéreas', code:'G3 201', dep:'10:30', arr:'21:30', dur:'11h00', stops:'1 parada', price:2800, tag:'Mais barato', bagagem:'Sem mala despachada', cabine:'Bagagem de mão', classe:'Econômica Basic' },
-    { airline:'Azul Linhas Aéreas', code:'AD 501', dep:'14:00', arr:'06:00+1', dur:'16h00', stops:'1 parada', price:2950, tag:'', bagagem:'1 mala 23kg', cabine:'Bagagem de mão', classe:'Econômica' },
+  "DEFAULT": [
+    {airline:"LATAM Airlines", color:"#E31837", code:"LA 001", dep:"08:00", arr:"18:00", dur:"10h00", stops:"Direto", price:3200, best:true, cheap:false, bagagem:"1 mala 23kg", cabine:"Mochila + bolsa", classe:"Econômica"},
+    {airline:"Gol Linhas Aéreas", color:"#FF5F01", code:"G3 201", dep:"10:30", arr:"21:30", dur:"11h00", stops:"1 parada", price:2800, best:false, cheap:true, bagagem:"Sem mala despachada", cabine:"Bagagem de mão", classe:"Econômica Basic"},
+    {airline:"Azul Linhas Aéreas", color:"#003087", code:"AD 501", dep:"14:00", arr:"06:00+1", dur:"16h00", stops:"1 parada", price:2950, best:false, cheap:false, bagagem:"1 mala 23kg", cabine:"Bagagem de mão", classe:"Econômica"}
   ]
 };
 
+var DEST_MAP = {
+  "miami":"MIA","orlando":"MCO","nova york":"JFK","new york":"JFK",
+  "houston":"IAH","los angeles":"LAX","chicago":"ORD","boston":"BOS",
+  "lisboa":"LIS","portugal":"LIS","madrid":"MAD","paris":"CDG",
+  "londres":"LHR","toquio":"NRT","japao":"NRT","cancun":"CUN",
+  "buenos aires":"EZE","santiago":"SCL","dubai":"DXB","roma":"FCO",
+  "amsterdam":"AMS","frankfurt":"FRA","barcelona":"BCN","mexico":"MEX",
+  "toronto":"YYZ","canada":"YYZ","sydney":"SYD","australia":"SYD",
+  "bangkok":"BKK","tailandia":"BKK","singapura":"SIN","seoul":"ICN",
+  "coreia":"ICN","pequim":"PEK","china":"PEK","shanghai":"PVG",
+  "mumbai":"BOM","india":"BOM","cairo":"CAI","egito":"CAI",
+  "joanesburgo":"JNB","africa do sul":"JNB","marrocos":"CMN","casablanca":"CMN",
+  "montevideo":"MVD","uruguai":"MVD","lima":"LIM","peru":"LIM",
+  "bogota":"BOG","colombia":"BOG","cidade do mexico":"MEX",
+  "zurique":"ZRH","suica":"ZRH","viena":"VIE","austria":"VIE",
+  "praga":"PRG","republica tcheca":"PRG","budapest":"BUD","hungria":"BUD",
+  "atenas":"ATH","grecia":"ATH","istanbul":"IST","turquia":"IST",
+  "vancouver":"YVR","montreal":"YUL","dubai":"DXB","abu dhabi":"AUH"
+};
+
 function getKey(origem, destino) {
-  const o = origem.match(/\(([A-Z]{3})\)/)?.[1] || 'GRU';
-  const d = destino.match(/\(([A-Z]{3})\)/)?.[1];
-  if(!d) {
-    const dmap = {
-      'miami':'MIA','orlando':'MCO','nova york':'JFK','new york':'JFK',
-      'lisboa':'LIS','portugal':'LIS','madrid':'MAD','paris':'CDG',
-      'espanha':'MAD','franca':'CDG','londres':'LHR','toquio':'NRT',
-      'japao':'NRT','cancun':'CUN','buenos aires':'EZE','santiago':'SCL',
-      'dubai':'DXB','roma':'FCO','amsterdam':'AMS','frankfurt':'FRA'
-    };
-    const dk = Object.keys(dmap).find(k => destino.toLowerCase().includes(k));
-    if(dk) return o+'-'+dmap[dk];
+  var oMatch = origem.match(/\(([A-Z]{3})\)/);
+  var o = oMatch ? oMatch[1] : "GRU";
+  var dMatch = destino.match(/\(([A-Z]{3})\)/);
+  if (dMatch) return o + "-" + dMatch[1];
+  var dl = destino.toLowerCase();
+  for (var k in DEST_MAP) {
+    if (dl.indexOf(k) >= 0) return o + "-" + DEST_MAP[k];
   }
-  return d ? o+'-'+d : 'DEFAULT';
+  return "DEFAULT";
 }
 
-function getOrgDest(key) {
-  const parts = key.split('-');
-  return { org: parts[0]||'GRU', dst: parts[1]||'DST' };
+function buscarVoos() {
+  var origem = document.getElementById("origem").value.trim();
+  var destino = document.getElementById("destino").value.trim();
+  var dataIda = document.getElementById("data-ida").value;
+  if (!destino) { alert("Por favor, informe o destino!"); return; }
+
+  var el = document.getElementById("flight-results");
+  el.innerHTML = "<div class=\"loading\"><span></span><span></span><span></span></div>";
+
+  setTimeout(function() {
+    var key = getKey(origem, destino);
+    var voos = VOOS[key] || VOOS["DEFAULT"];
+    var origCode = key !== "DEFAULT" ? key.split("-")[0] : "GRU";
+    var destCode = key !== "DEFAULT" ? key.split("-")[1] : "DST";
+    var origNome = origem.replace(/\([^)]*\)/g, "").trim().split(" ")[0];
+    var destNome = destino.replace(/\([^)]*\)/g, "").trim().split(" ")[0];
+    var dataFmt = "";
+    if (dataIda) {
+      var d = new Date(dataIda + "T12:00:00");
+      dataFmt = d.toLocaleDateString("pt-BR", {day:"2-digit", month:"short"});
+    }
+    var spUrl = "https://portal.speedmilhas.com/logar";
+
+    var html = "<div class=\"flights-header\">";
+    html += "<h3>" + voos.length + " voos encontrados";
+    if (destNome) html += " para " + destNome;
+    if (dataFmt) html += " - " + dataFmt;
+    html += "</h3><span>Preço por pessoa (ida e volta)</span></div>";
+
+
+
+    for (var i = 0; i < voos.length; i++) {
+      var v = voos[i];
+      var initials = v.airline.split(" ").map(function(w){return w[0];}).join("").slice(0,2).toUpperCase();
+      var cardClass = v.best ? "flight-card best" : "flight-card";
+      var stopsClass = v.stops === "Direto" ? "stops-direct" : "stops-layover";
+      var malaIcon = v.bagagem.indexOf("Sem") >= 0 ? "⚠️" : "🧳";
+
+      html += "<div class=\"" + cardClass + "\" onclick=\"window.open('" + spUrl + "','_blank')\">";
+
+      // Logo
+      html += "<div class=\"airline-logo\" style=\"background:" + v.color + "\">" + initials + "</div>";
+
+      // Info + badges
+      html += "<div class=\"flight-info\">";
+      html += "<div class=\"flight-name\">" + v.airline + "</div>";
+      html += "<div class=\"flight-class\">" + v.classe + "</div>";
+      html += "<div class=\"flight-badges\">";
+      if (v.best) html += "<span class=\"badge-best\">Melhor opção</span>";
+      if (v.cheap) html += "<span class=\"badge-cheap\">Mais barato</span>";
+      html += "</div></div>";
+
+      // Route
+      html += "<div class=\"flight-route\">";
+      html += "<div class=\"airport-time\"><div class=\"time\">" + v.dep + "</div><div class=\"iata\">" + origCode + "</div><div class=\"city\">" + origNome + "</div></div>";
+      html += "<div class=\"route-line\"><div class=\"dur\">" + v.dur + "</div><div class=\"line\"></div><div class=\"stops " + stopsClass + "\">" + v.stops + "</div></div>";
+      html += "<div class=\"airport-time\"><div class=\"time\">" + v.arr + "</div><div class=\"iata\">" + destCode + "</div><div class=\"city\">" + destNome + "</div></div>";
+      html += "</div>";
+
+      // Details
+      html += "<div class=\"flight-details\">";
+      html += "<div class=\"detail-item\">" + malaIcon + " " + v.bagagem + "</div>";
+      html += "<div class=\"detail-item\">🎒 " + v.cabine + "</div>";
+      html += "<div class=\"detail-code\">🎫 " + v.code + "</div>";
+      html += "</div>";
+
+      // Price
+      html += "<div class=\"flight-price-col\">";
+      html += "<div class=\"price\">R$ " + v.price.toLocaleString("pt-BR") + "</div>";
+      html += "<div class=\"per\">por pessoa</div>";
+      html += "<a href=\"" + spUrl + "\" target=\"_blank\" class=\"flight-btn\" onclick=\"event.stopPropagation()\">Comprar</a>";
+      html += "</div>";
+
+      html += "</div>";
+    }
+
+    html += "<div class=\"speedmilhas-banner\">";
+    html += "<div class=\"sb-text\"><div class=\"sb-badge\">Atendimento especializado</div>";
+    html += "<h3>Prefere atendimento personalizado?</h3>";
+    html += "<p>Use o código 🎫 do voo escolhido acima e fale com nosso especialista pelo WhatsApp para emitir sua passagem.</p></div>";
+    html += "<a href=\"https://wa.me/5511974566332?text=Ola!%20Vim%20pelo%20TaxPay%20e%20quero%20ajuda%20para%20comprar%20minha%20passagem.\" target=\"_blank\" class=\"btn-speedmilhas\">💬 Falar no WhatsApp</a>";
+    html += "</div>";
+
+    el.innerHTML = html;
+  }, 1400);
 }
 
-async function buscarVoos() {
-  const origem = document.getElementById('origem').value.trim();
-  const destino = document.getElementById('destino').value.trim();
-  const dataIda = document.getElementById('data-ida').value;
-  if(!destino) { alert('Por favor, informe o destino!'); return; }
-
-  const el = document.getElementById('flight-results');
-  el.innerHTML = '<div class="loading"><span></span><span></span><span></span></div>';
-  await new Promise(r => setTimeout(r, 1400));
-
-  const key = getKey(origem, destino);
-  const voos = VOOS_MOCK[key] || VOOS_MOCK['DEFAULT'];
-  const {org, dst} = getOrgDest(key);
-  const dataFmt = dataIda ? new Date(dataIda+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'}) : '';
-  const destNome = destino.replace(/\([^)]*\)/,'').trim();
-  const spUrl = 'https://portal.speedmilhas.com/logar';
-  const menorPreco = Math.min(...voos.map(v=>v.price));
-
-  let cards = voos.map(function(v, i) {
-    const isBest = i === 0;
-    const isCheap = v.price === menorPreco && i > 0;
-    const temMala = !v.bagagem.includes('Sem');
-    return '<div class="flight-card '+(isBest?'best':'')+'" onclick="window.open(''+spUrl+'','_blank')">'
-      +'<div style="display:flex;align-items:center;gap:12px;">'
-        +airlineLogo(v.airline)
-        +'<div>'
-          +'<div style="font-size:13px;font-weight:600;color:var(--dark)">'+v.airline+'</div>'
-          +'<div style="font-size:11px;color:var(--gray)">'+v.classe+'</div>'
-        +'</div>'
-        +(isBest ? '<span style="margin-left:8px;font-size:11px;font-weight:700;background:var(--teal);color:white;padding:2px 8px;border-radius:50px;">⭐ Melhor opção</span>' : '')
-        +(isCheap ? '<span style="margin-left:8px;font-size:11px;font-weight:700;background:var(--amber);color:white;padding:2px 8px;border-radius:50px;">💰 Mais barato</span>' : '')
-      +'</div>'
-      +'<div style="display:flex;align-items:center;gap:20px;flex:1;justify-content:center;">'
-        +'<div style="text-align:center;">'
-          +'<div style="font-family:Syne,sans-serif;font-size:22px;font-weight:700;">'+v.dep+'</div>'
-          +'<div style="font-size:12px;font-weight:700;color:var(--teal);">'+org+'</div>'
-          +'<div style="font-size:11px;color:var(--gray);">'+origem.replace(/\([^)]*\)/,'').trim().split(' ')[0]+'</div>'
-        +'</div>'
-        +'<div style="flex:1;text-align:center;">'
-          +'<div style="font-size:11px;color:var(--gray);">'+v.dur+'</div>'
-          +'<div style="height:1px;background:var(--border);position:relative;margin:6px 0;">'
-            +'<span style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:14px;">✈️</span>'
-          +'</div>'
-          +'<div style="font-size:11px;color:'+(v.stops==='Direto'?'var(--teal)':'var(--amber)')+';">'+v.stops+'</div>'
-        +'</div>'
-        +'<div style="text-align:center;">'
-          +'<div style="font-family:Syne,sans-serif;font-size:22px;font-weight:700;">'+v.arr+'</div>'
-          +'<div style="font-size:12px;font-weight:700;color:var(--teal);">'+dst+'</div>'
-          +'<div style="font-size:11px;color:var(--gray);">'+destNome.split(' ')[0]+'</div>'
-        +'</div>'
-      +'</div>'
-      +'<div style="display:flex;flex-direction:column;gap:6px;min-width:120px;">'
-        +'<div style="font-size:11px;color:var(--gray);display:flex;align-items:center;gap:4px;">'
-          +(temMala?'🧳':'⚠️')+' '+v.bagagem
-        +'</div>'
-        +'<div style="font-size:11px;color:var(--gray);display:flex;align-items:center;gap:4px;">🎒 '+v.cabine+'</div>'
-        +'<div style="font-size:11px;color:var(--teal);font-weight:600;display:flex;align-items:center;gap:4px;">🎫 '+v.code+'</div>'
-      +'</div>'
-      +'<div style="text-align:right;flex-shrink:0;">'
-        +'<div style="font-family:Syne,sans-serif;font-size:24px;font-weight:700;color:var(--teal);">R$ '+v.price.toLocaleString('pt-BR')+'</div>'
-        +'<div style="font-size:11px;color:var(--gray);margin-bottom:8px;">por pessoa • ida e volta</div>'
-        +'<a href="'+spUrl+'" target="_blank" class="flight-btn" onclick="event.stopPropagation()">Comprar →</a>'
-      +'</div>'
-    +'</div>';
-  }).join('');
-
-  el.innerHTML = 
-    '<div class="flights-header">'
-      +'<h3>'+voos.length+' voos encontrados '+( destNome ? '→ '+destNome : '')+( dataFmt ? ' • '+dataFmt : '')+'</h3>'
-      +'<span>Preços por pessoa (ida e volta)</span>'
-    +'</div>'
-    +'<div style="background:var(--teal-pale);border:1px solid var(--teal-mid);border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--teal);display:flex;align-items:center;gap:8px;">'
-      +'<span style="font-size:18px;">💡</span>'
-      +'<span><strong>Como comprar:</strong> Anote o <strong>código 🎫</strong> do voo desejado e busque esse código no portal SpeedMilhas para emitir exatamente esse voo.</span>'
-    +'</div>'
-    +cards
-    +'<div class="speedmilhas-banner">'
-      +'<div class="sb-text">'
-        +'<div class="sb-badge">✈️ Portal de emissão</div>'
-        +'<h3>Acesse o portal SpeedMilhas para emitir</h3>'
-        +'<p>Use o <strong style="color:var(--teal-mid)">código identificador 🎫</strong> do voo escolhido acima para encontrá-lo e emitir sua passagem no portal.</p>'
-      +'</div>'
-      +'<a href="'+spUrl+'" target="_blank" class="btn-speedmilhas">Acessar portal →</a>'
-    +'</div>';
-}
-
-// ===================== ALFÂNDEGA =====================
-let alfItems = [{nome:'',valor:''}];
+// ALFANDEGA
+var alfItems = [{nome:"", valor:""}];
 
 function renderItems() {
-  document.getElementById('items-list').innerHTML = alfItems.map(function(it,i) {
-    return '<div class="item-row">'
-      +'<input type="text" placeholder="Item (ex: tênis Nike)" value="'+it.nome+'" oninput="alfItems['+i+'].nome=this.value" />'
-      +'<input type="number" placeholder="US$" value="'+it.valor+'" min="0" step="0.01" oninput="alfItems['+i+'].valor=this.value;calcular()" style="width:85px;" />'
-      +(alfItems.length>1?'<button onclick="alfItems.splice('+i+',1);renderItems();calcular()">✕</button>':'')
-    +'</div>';
-  }).join('');
+  var html = "";
+  for (var i = 0; i < alfItems.length; i++) {
+    var it = alfItems[i];
+    html += "<div class=\"item-row\">";
+    html += "<input type=\"text\" placeholder=\"Item (ex: tênis Nike)\" value=\"" + it.nome + "\" oninput=\"alfItems[" + i + "].nome=this.value\">";
+    html += "<input type=\"number\" placeholder=\"US$\" value=\"" + it.valor + "\" min=\"0\" step=\"0.01\" oninput=\"alfItems[" + i + "].valor=this.value;calcular()\" style=\"width:85px\">";
+    if (alfItems.length > 1) {
+      html += "<button onclick=\"alfItems.splice(" + i + ",1);renderItems();calcular()\">X</button>";
+    }
+    html += "</div>";
+  }
+  document.getElementById("items-list").innerHTML = html;
 }
 
-function addItem() { alfItems.push({nome:'',valor:''}); renderItems(); }
+function addItem() {
+  alfItems.push({nome:"", valor:""});
+  renderItems();
+}
 
 function calcular() {
-  const limite = document.getElementById('modal').value==='aereo' ? 1000 : 500;
-  const cambio = parseFloat(document.getElementById('cambio').value) || 5.50;
-  const total = alfItems.reduce(function(s,it){ return s+(parseFloat(it.valor)||0); }, 0);
-  if(total===0){ document.getElementById('calc-result').innerHTML=''; return; }
-  const excesso = Math.max(0, total-limite);
-  const imposto = excesso * 0.5;
-  const totalBRL = total * cambio;
-  const impostoBRL = imposto * cambio;
-  let alerta = '';
-  if(total<=limite) {
-    alerta = '<div class="result-alert ok">✅ Dentro do limite de US$ '+limite+'. Nada a declarar!</div>';
-  } else if(imposto<50) {
-    alerta = '<div class="result-alert warn">⚠️ Excedeu o limite em US$ '+excesso.toFixed(2)+'. Declare os itens ao chegar.</div>';
-  } else {
-    alerta = '<div class="result-alert danger">🚨 Imposto de R$ '+impostoBRL.toFixed(2)+'. Considere distribuir com acompanhantes.</div>';
+  var modal = document.getElementById("modal").value;
+  var limite = modal === "aereo" ? 1000 : 500;
+  var cambio = parseFloat(document.getElementById("cambio").value) || 5.50;
+  var total = 0;
+  for (var i = 0; i < alfItems.length; i++) {
+    total += parseFloat(alfItems[i].valor) || 0;
   }
-  document.getElementById('calc-result').innerHTML =
-    '<div class="calc-result-box">'
-      +'<div class="result-row"><span class="r-lbl">Total das compras</span><span class="r-val">US$ '+total.toFixed(2)+'</span></div>'
-      +'<div class="result-row"><span class="r-lbl">Limite de isenção</span><span class="r-val">US$ '+limite+'</span></div>'
-      +'<div class="result-row"><span class="r-lbl">Valor excedente</span><span class="r-val" style="color:'+(excesso>0?'#FCA5A5':'#5DCAA5')+'">US$ '+excesso.toFixed(2)+'</span></div>'
-      +'<div class="result-row"><span class="r-lbl">Imposto estimado (50%)</span><span class="r-val" style="color:'+(imposto>0?'#FCA5A5':'#5DCAA5')+'">US$ '+imposto.toFixed(2)+'</span></div>'
-      +'<div class="result-total"><span class="t-lbl">Total em reais</span><span class="t-val">R$ '+(totalBRL+impostoBRL).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'</span></div>'
-      +alerta
-    +'</div>';
+  if (total === 0) { document.getElementById("calc-result").innerHTML = ""; return; }
+
+  var excesso = total > limite ? total - limite : 0;
+  var imposto = excesso * 0.5;
+  var totalBRL = total * cambio;
+  var impostoBRL = imposto * cambio;
+  var totalFinal = (totalBRL + impostoBRL).toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2});
+
+  var alerta = "";
+  if (total <= limite) {
+    alerta = "<div class=\"result-alert alert-ok\">Dentro do limite de US$ " + limite + ". Nada a declarar!</div>";
+  } else if (imposto < 50) {
+    alerta = "<div class=\"result-alert alert-warn\">Excedeu o limite em US$ " + excesso.toFixed(2) + ". Declare os itens ao chegar.</div>";
+  } else {
+    alerta = "<div class=\"result-alert alert-danger\">Imposto de R$ " + impostoBRL.toFixed(2) + ". Considere distribuir com acompanhantes.</div>";
+  }
+
+  var html = "<div class=\"calc-result-box\">";
+  html += "<div class=\"result-row\"><span class=\"r-lbl\">Total das compras</span><span class=\"r-val\">US$ " + total.toFixed(2) + "</span></div>";
+  html += "<div class=\"result-row\"><span class=\"r-lbl\">Limite de isenção</span><span class=\"r-val\">US$ " + limite + "</span></div>";
+  html += "<div class=\"result-row\"><span class=\"r-lbl\">Valor excedente</span><span class=\"r-val\" style=\"color:" + (excesso > 0 ? "#FCA5A5" : "#5DCAA5") + "\">US$ " + excesso.toFixed(2) + "</span></div>";
+  html += "<div class=\"result-row\"><span class=\"r-lbl\">Imposto estimado (50%)</span><span class=\"r-val\" style=\"color:" + (imposto > 0 ? "#FCA5A5" : "#5DCAA5") + "\">US$ " + imposto.toFixed(2) + "</span></div>";
+  html += "<div class=\"result-total\"><span class=\"t-lbl\">Total em reais</span><span class=\"t-val\">R$ " + totalFinal + "</span></div>";
+  html += alerta + "</div>";
+  document.getElementById("calc-result").innerHTML = html;
 }
 
 renderItems();
 
-// ===================== CONVERSOR =====================
-let taxas = {};
-
-async function buscarCotacoes() {
-  try {
-    const r = await fetch('https://api.exchangerate-api.com/v4/latest/BRL');
-    const d = await r.json();
-    taxas = d.rates;
-    converter();
-    document.getElementById('conv-update').textContent = 'Cotações atualizadas • ' + new Date().toLocaleTimeString('pt-BR');
-  } catch(e) {
-    taxas = { USD:0.182, EUR:0.168, GBP:0.143, ARS:185, JPY:27.3, CAD:0.247, AUD:0.278, CLP:168, MXN:3.12, UYU:7.1 };
-    converter();
-    document.getElementById('conv-update').textContent = 'Cotações aproximadas (sem conexão)';
-  }
-}
-
-const MOEDAS = [
-  { code:'USD', flag:'🇺🇸', name:'Dólar EUA' },
-  { code:'EUR', flag:'🇪🇺', name:'Euro' },
-  { code:'GBP', flag:'🇬🇧', name:'Libra Esterlina' },
-  { code:'JPY', flag:'🇯🇵', name:'Iene Japonês' },
-  { code:'CAD', flag:'🇨🇦', name:'Dólar Canadense' },
-  { code:'AUD', flag:'🇦🇺', name:'Dólar Australiano' },
-  { code:'ARS', flag:'🇦🇷', name:'Peso Argentino' },
-  { code:'MXN', flag:'🇲🇽', name:'Peso Mexicano' },
-  { code:'CLP', flag:'🇨🇱', name:'Peso Chileno' },
-  { code:'UYU', flag:'🇺🇾', name:'Peso Uruguaio' },
+// CONVERSOR
+var taxas = {};
+var MOEDAS = [
+  {code:"USD", flag:"🇺🇸", name:"Dólar EUA"},
+  {code:"EUR", flag:"🇪🇺", name:"Euro"},
+  {code:"GBP", flag:"🇬🇧", name:"Libra Esterlina"},
+  {code:"JPY", flag:"🇯🇵", name:"Iene Japonês"},
+  {code:"CAD", flag:"🇨🇦", name:"Dólar Canadense"},
+  {code:"AUD", flag:"🇦🇺", name:"Dólar Australiano"},
+  {code:"ARS", flag:"🇦🇷", name:"Peso Argentino"},
+  {code:"MXN", flag:"🇲🇽", name:"Peso Mexicano"},
+  {code:"CLP", flag:"🇨🇱", name:"Peso Chileno"},
+  {code:"UYU", flag:"🇺🇾", name:"Peso Uruguaio"}
 ];
 
+function buscarCotacoes() {
+  fetch("https://api.exchangerate-api.com/v4/latest/BRL")
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      taxas = d.rates;
+      converter();
+      document.getElementById("conv-update").textContent = "Cotações atualizadas: " + new Date().toLocaleTimeString("pt-BR");
+    })
+    .catch(function(){
+      taxas = {USD:0.182,EUR:0.168,GBP:0.143,ARS:185,JPY:27.3,CAD:0.247,AUD:0.278,CLP:168,MXN:3.12,UYU:7.1};
+      converter();
+      document.getElementById("conv-update").textContent = "Cotações aproximadas (sem conexão)";
+    });
+}
+
 function converter() {
-  const valor = parseFloat(document.getElementById('conv-valor').value) || 0;
-  const de = document.getElementById('conv-de').value;
-  if(!Object.keys(taxas).length) return;
-  const alvo = MOEDAS.filter(function(m){ return m.code !== de; });
-  document.getElementById('moedas-grid').innerHTML = alvo.map(function(m) {
-    let result;
-    if(de==='BRL') { result = valor * (taxas[m.code]||0); }
-    else { result = (valor / (taxas[de]||1)) * (taxas[m.code]||0); }
-    const fmt = result > 100
-      ? result.toLocaleString('pt-BR',{maximumFractionDigits:0})
-      : result.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-    return '<div class="moeda-box"><div class="m-flag">'+m.flag+'</div><div class="m-name">'+m.name+'</div><div class="m-val">'+fmt+'</div><div class="m-code">'+m.code+'</div></div>';
-  }).join('');
+  var valor = parseFloat(document.getElementById("conv-valor").value) || 0;
+  var de = document.getElementById("conv-de").value;
+  if (!Object.keys(taxas).length) return;
+  var html = "";
+  for (var i = 0; i < MOEDAS.length; i++) {
+    var m = MOEDAS[i];
+    if (m.code === de) continue;
+    var result;
+    if (de === "BRL") {
+      result = valor * (taxas[m.code] || 0);
+    } else {
+      result = (valor / (taxas[de] || 1)) * (taxas[m.code] || 0);
+    }
+    var fmt = result > 100
+      ? result.toLocaleString("pt-BR", {maximumFractionDigits:0})
+      : result.toLocaleString("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2});
+    html += "<div class=\"moeda-box\">";
+    html += "<div class=\"m-flag\">" + m.flag + "</div>";
+    html += "<div class=\"m-name\">" + m.name + "</div>";
+    html += "<div class=\"m-val\">" + fmt + "</div>";
+    html += "<div class=\"m-code\">" + m.code + "</div>";
+    html += "</div>";
+  }
+  document.getElementById("moedas-grid").innerHTML = html;
 }
 
 buscarCotacoes();
+
+// RANKING TOP 10
+var RANKING = [
+  {pos:1, orig:"GRU", dest:"EZE", rota:"São Paulo → Buenos Aires", airline:"Aerolíneas Argentinas", code:"AR 1303", price:750, stops:"Direto", dur:"2h30", bagagem:"1 mala 23kg"},
+  {pos:2, orig:"GRU", dest:"SCL", rota:"São Paulo → Santiago", airline:"LATAM Airlines", code:"LA 703", price:890, stops:"Direto", dur:"3h10", bagagem:"1 mala 23kg"},
+  {pos:3, orig:"GRU", dest:"MVD", rota:"São Paulo → Montevidéu", airline:"LATAM Airlines", code:"LA 509", price:920, stops:"Direto", dur:"2h45", bagagem:"1 mala 23kg"},
+  {pos:4, orig:"GRU", dest:"BOG", rota:"São Paulo → Bogotá", airline:"Avianca", code:"AV 023", price:1450, stops:"Direto", dur:"6h20", bagagem:"1 mala 23kg"},
+  {pos:5, orig:"GRU", dest:"LIM", rota:"São Paulo → Lima", airline:"LATAM Airlines", code:"LA 801", price:1580, stops:"Direto", dur:"5h45", bagagem:"1 mala 23kg"},
+  {pos:6, orig:"GRU", dest:"MIA", rota:"São Paulo → Miami", airline:"Gol + Spirit", code:"G3 9042", price:1980, stops:"2 paradas", dur:"14h15", bagagem:"Sem mala"},
+  {pos:7, orig:"GRU", dest:"LIS", rota:"São Paulo → Lisboa", airline:"Gol + Iberia", code:"G3 8031", price:2100, stops:"2 paradas", dur:"19h00", bagagem:"Sem mala"},
+  {pos:8, orig:"GRU", dest:"MIA", rota:"São Paulo → Miami", airline:"Azul + JetBlue", code:"AD 4102", price:2450, stops:"1 parada", dur:"12h20", bagagem:"Sem mala"},
+  {pos:9, orig:"GRU", dest:"MAD", rota:"São Paulo → Madrid", airline:"Gol + Iberia", code:"G3 6031", price:2250, stops:"2 paradas", dur:"23h00", bagagem:"Sem mala"},
+  {pos:10, orig:"GRU", dest:"CDG", rota:"São Paulo → Paris", airline:"Gol + Air France", code:"G3 9044", price:2890, stops:"2 paradas", dur:"24h00", bagagem:"Sem mala"}
+];
+
+function renderRanking() {
+  var spUrl = "https://portal.speedmilhas.com/logar";
+  var html = "";
+  for (var i = 0; i < RANKING.length; i++) {
+    var r = RANKING[i];
+    var cls = r.pos <= 3 ? "rank-card rank-" + r.pos : "rank-card";
+    var numCls = r.pos <= 3 ? "rank-num" : "rank-num other";
+    var medal = r.pos === 1 ? "🥇" : r.pos === 2 ? "🥈" : r.pos === 3 ? "🥉" : r.pos;
+    var directCls = r.stops === "Direto" ? "rank-tag direct" : "rank-tag";
+    html += "<div class=\"" + cls + "\" onclick=\"window.open('" + spUrl + "','_blank')\">";
+    html += "<div class=\"" + numCls + "\">" + medal + "</div>";
+    html += "<div class=\"rank-info\">";
+    html += "<div class=\"rank-route\">" + r.rota + "</div>";
+    html += "<div class=\"rank-airline\">" + r.airline + " · 🎫 " + r.code + "</div>";
+    html += "<div class=\"rank-details\">";
+    html += "<span class=\"" + directCls + "\">" + r.stops + "</span>";
+    html += "<span class=\"rank-tag\">" + r.dur + "</span>";
+    html += "<span class=\"rank-tag\">🧳 " + r.bagagem + "</span>";
+    html += "</div></div>";
+    html += "<div class=\"rank-price\"><div class=\"rp\">R$ " + r.price.toLocaleString("pt-BR") + "</div><div class=\"rper\">por pessoa</div></div>";
+    html += "</div>";
+  }
+  document.getElementById("ranking-grid").innerHTML = html;
+}
+
+renderRanking();
 </script>
 </body>
 </html>
