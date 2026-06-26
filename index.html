@@ -259,7 +259,7 @@ footer .logo { font-size: 18px; }
     </div>
   </div>
   <div class="hero-stats">
-    <div class="stat-box"><div class="num">US$500</div><div class="lbl">Limite de isenção aérea</div></div>
+    <div class="stat-box"><div class="num">US$1.000</div><div class="lbl">Limite de isenção aérea/marítima</div></div>
     <div class="stat-box"><div class="num">50%</div><div class="lbl">Imposto sobre excesso</div></div>
     <div class="stat-box"><div class="num">US$300</div><div class="lbl">Limite terrestre/marítimo</div></div>
     <div class="stat-box"><div class="num">R$0</div><div class="lbl">Custo para usar o site</div></div>
@@ -319,7 +319,7 @@ footer .logo { font-size: 18px; }
         <div class="form-group">
           <label>Modal de transporte</label>
           <select id="modal" onchange="calcular()">
-            <option value="aereo">✈️ Aéreo — isenção até US$ 500</option>
+            <option value="aereo">✈️ Aéreo/Marítimo — isenção até US$ 1.000</option>
             <option value="terrestre">🚌 Terrestre/Marítimo — isenção até US$ 300</option>
           </select>
         </div>
@@ -364,13 +364,13 @@ footer .logo { font-size: 18px; }
     <div class="tax-grid">
       <div class="tax-box">
         <div class="tx-label">Isenção Aérea</div>
-        <div class="tx-val">US$ 500</div>
-        <div class="tx-desc">Por pessoa, por viagem. Inclui presentes e itens de uso pessoal.</div>
+        <div class="tx-val">US$ 1.000</div>
+        <div class="tx-desc">Por pessoa, por viagem (via aérea ou marítima). Inclui presentes e itens de uso pessoal.</div>
       </div>
       <div class="tax-box">
         <div class="tx-label">Isenção Terrestre</div>
-        <div class="tx-val">US$ 300</div>
-        <div class="tx-desc">Para entradas por via terrestre, fluvial ou marítima.</div>
+        <div class="tx-val">US$ 500</div>
+        <div class="tx-desc">Para entradas por via terrestre ou fluvial.</div>
       </div>
       <div class="tax-box">
         <div class="tx-label">Imposto sobre Excesso</div>
@@ -552,7 +552,7 @@ function renderItems() {
 function addItem() { alfItems.push({nome:'',valor:''}); renderItems(); }
 
 function calcular() {
-  const limite = document.getElementById('modal').value==='aereo'?500:300;
+  const limite = document.getElementById('modal').value==='aereo'?1000:500;
   const cambio = parseFloat(document.getElementById('cambio').value)||5.50;
   const total = alfItems.reduce((s,it)=>s+(parseFloat(it.valor)||0),0);
   if(total===0){document.getElementById('calc-result').innerHTML='';return;}
@@ -561,7 +561,7 @@ function calcular() {
   const totalBRL = total*cambio;
   const impostoBRL = imposto*cambio;
   let alerta='';
-  if(total<=limite) alerta=`<div class="result-alert ok">✅ Dentro do limite de US$ ${limite}. Nada a declarar!</div>`;
+  if(total<=limite) alerta=`<div class="result-alert ok">✅ Dentro do limite de US$ \${limite}. Nada a declarar!</div>`;
   else if(imposto<50) alerta=`<div class="result-alert warn">⚠️ Excedeu o limite em US$ ${excesso.toFixed(2)}. Declare os itens ao chegar.</div>`;
   else alerta=`<div class="result-alert danger">🚨 Imposto de R$ ${impostoBRL.toFixed(2)}. Considere distribuir com acompanhantes.</div>`;
   document.getElementById('calc-result').innerHTML=`
@@ -630,4 +630,3 @@ buscarCotacoes();
 </script>
 </body>
 </html>
-
